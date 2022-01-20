@@ -1,0 +1,41 @@
+Algorithm:
+	•	Get the number of pages ‘pg’ in a process from the user.
+	•	Get number of frames ‘frm’, frame size ‘size’ and starting address ‘straddr’ from the user.
+	•	Create a page table by getting user input or initialize the table as default. The page table contains Page number & frame number.
+	•	Get the page number ‘pgn’ and instruction number ‘ins’ to be executed from the user.
+	•	Start a linear search to find ‘pgn’ in page table and get the corresponding frame number ‘frmno’.
+	•	Calculate the frame number using following formula:
+Frame address = (Starting Address) + (frame number + 1) * (frame size)
+
+Program:
+Filename: ex10_virtual.c #include <stdio.h>
+
+int main()
+{
+int pg, ins, frm, size, straddr, pgn, frmno, frmaddr;
+
+printf("\nEnter Number of Pages: "); scanf("%d", &pg);
+printf("Enter number of Frames: "); scanf("%d", &frm);
+printf("Enter frame Size: "); scanf("%d", &size);
+printf("Enter Starting Address: "); scanf("%d", &straddr);
+
+int prc[pg], i;
+//Initializing Page table
+int pgtable[5][2] = {{5, 1}, {2, 8}, {1,3}, {4, 17}, {3, 9}};
+
+printf("Enter the page number to execute: "); scanf("%d", &pgn);
+printf("Enter the instruction number to execute: "); scanf("%d", &ins);
+//Searching for given page number in page table for(i = 0; i<5; i++)
+{
+if(pgtable[i][0]==pgn)
+{
+frmno  = pgtable[i][1];
+}
+}
+
+printf("Frame Address: ");
+//Calculating Frame Address
+frmaddr = (straddr + (frmno+1)*(size)); printf("%d\n\n", frmaddr);
+
+return 0;
+}
